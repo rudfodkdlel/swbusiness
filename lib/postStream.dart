@@ -43,6 +43,7 @@ class Posts extends StatelessWidget {
                 postDocs[index]['Content'],
                 postDocs[index]['Title'],
                 postDocs[index]['WriterName'],
+                postDocs[index]['like'],
               ),
             );
           },

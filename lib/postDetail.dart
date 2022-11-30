@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:parkmingyun/config/palette.dart';
 import 'package:parkmingyun/post.dart';
+
 
 class postDetailPage extends StatefulWidget {
   final Post post;
@@ -11,9 +13,15 @@ class postDetailPage extends StatefulWidget {
   State<postDetailPage> createState() => _postDetailPage();
 }
 
+
+
 class _postDetailPage extends State<postDetailPage> {
 
-  void showPopup(context) {
+
+
+
+
+ /* void showPopup(context) {
     showDialog(
       context: context,
       builder: (context) {
@@ -38,10 +46,13 @@ class _postDetailPage extends State<postDetailPage> {
                 )));
       },
     );
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
+
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
 
     return Scaffold(
       appBar: AppBar(
@@ -51,14 +62,26 @@ class _postDetailPage extends State<postDetailPage> {
         ),
         elevation: 3.0,
         backgroundColor: Colors.redAccent,
+        actions: [
+          IconButton( // 글 삭제 버튼
+              onPressed: () {
+                firestore.collection("Post").doc().delete();
+                // 수정 필요, doc 이름 가져오는법?
+              },
+              icon: Icon(Icons.delete),
+              color: Colors.white),
+        ],
       ),
       body: ListView(children: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 20, 10, 5),
+
             child: Container(
+
               height: MediaQuery.of(context).size.width * 0.08,
               width: MediaQuery.of(context).size.width * 0.15,
+
               child: DecoratedBox(
                 decoration: BoxDecoration(
 
@@ -72,6 +95,7 @@ class _postDetailPage extends State<postDetailPage> {
 
               ),
             ),
+
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 8, 20, 5),
@@ -110,7 +134,7 @@ class _postDetailPage extends State<postDetailPage> {
                     padding: EdgeInsets.fromLTRB(0, 18, 0, 7),
                     width: MediaQuery.of(context).size.width * 0.98,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         DecoratedBox(
                           decoration: BoxDecoration(
@@ -125,6 +149,7 @@ class _postDetailPage extends State<postDetailPage> {
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(13, 15, 13, 15),
                             child: Text(
+
                               widget.post.content.toString(),
                               style: TextStyle(
                                 fontSize: 14,
@@ -176,7 +201,13 @@ class _postDetailPage extends State<postDetailPage> {
                 width: MediaQuery.of(context).size.width * 0.90,
                 child: OutlinedButton(
                   onPressed: () {
-                    showPopup(context);
+                    String Scount = widget.post.like.toString();
+                    int count = int.parse(Scount); // like 표시
+                    ++count;
+
+                    firestore.collection("Post").doc('').update({'like' : count.toString()});
+                    // like값 가져와서 더한후 업데이트
+                    // document 이름 가져오게끔?
                   },
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(

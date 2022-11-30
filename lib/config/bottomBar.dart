@@ -24,7 +24,7 @@ class _BottomBarState extends State<BottomBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.post_add_outlined),
-          label: '게시판',
+          label: '커뮤니티',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.people_sharp),

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:parkmingyun/config/palette.dart';
+import 'package:parkmingyun/postDetail.dart';
+
 
 class PostList extends StatelessWidget {
   const PostList(
       this.content,
       this.title,
       this.writerName,
+      this.like,
       {Key? key})
       : super(key: key);
 
   final String content;
   final String title;
   final String writerName;
+  final String like;
 
   // String curState() {
   //   if (maxParticipants > curParticipants) {
@@ -20,6 +24,7 @@ class PostList extends StatelessWidget {
   //     return "모집완료";
   //   }
   // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +43,7 @@ class PostList extends StatelessWidget {
             child: Center(
               child: Padding(
                 padding: EdgeInsets.only(left: 10, right: 10),
+
                 child: Text(
                   content,
                   style: TextStyle(
@@ -53,7 +59,7 @@ class PostList extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 22, right: 5, top: 5),
           child: Text(
-            "작성자: $writerName",
+            "작성자: $writerName, 좋아요 수 : $like",
             style: TextStyle(fontSize: 13, color: Colors.black, height: 1.0),
           ),
         ),
@@ -74,6 +80,7 @@ class PostList extends StatelessWidget {
             height: 1.0,
             width: 500.0,
           ),
+
         ),
       ],
     );

@@ -75,6 +75,7 @@ class _newPost extends State<newPost> {
                                       "Uid": _userProvider.uid,
                                       "WriterName": _userProvider.nickname,
                                       "Content": post.content!,
+                                      "like": '0',
                                       // "Date": post.date!,
                                       // "UpperCategory": post.upperCategory!,
                                       // "LowerCategory": post.lowerCategory!,
@@ -103,6 +104,7 @@ class _newPost extends State<newPost> {
                               },
                               icon: const Icon(Icons.circle_outlined),
                               label: const Text('네'),
+
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.redAccent,
                                 onPrimary: Colors.white, // Background color
@@ -258,7 +260,7 @@ class _newPost extends State<newPost> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                        const HomeScreen()),
+                                        const postPage()),
                                   );
                                 },
                                 style: OutlinedButton.styleFrom(

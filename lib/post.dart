@@ -4,16 +4,19 @@ class Post {
 
   String? title;
   String? content;
+  String? like;
 
 
   Post({
     this.title,
     this.content,
+    this.like,
   });
 
   Post.fromJson(dynamic json) {
     title = json['Title'];
     content = json['Content'];
+    like = json['like'];
   }
 
   Post.fromSnapShot(DocumentSnapshot<Map<String, dynamic>> snapshot)
@@ -25,5 +28,6 @@ class Post {
   Map<String, dynamic> toJson() => {
     'title': title,
     'content': content,
+    'like' : like,
   };
 }
